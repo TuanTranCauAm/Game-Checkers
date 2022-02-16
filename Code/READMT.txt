@@ -1,0 +1,14 @@
+_pycache_, LoadGame: Lưu các ván cờ chưa chơi xong
+Image: Ảnh cung cấp cho giao diện
+Algorithm.py: Giải thuật Minimax + alphabeta và đánh giá heuristic
+PieceOperation.py: Các thao tác đối với quân cờ
+BotvsBot.py: Code để test độ hiệu quả giải thuật và đánh giá heuristic
+PlayervsBot.py: Code người chơi thi đấu với Computer
+PlayervsPlayer.py: Code 2 người chơi thi đấu với nhau
+Main.py: Giao diện chính của trò chơi
+
+Chơi game: Run Main.py
+Test giải thuật: Run BotvsBot.py
+
+
+
