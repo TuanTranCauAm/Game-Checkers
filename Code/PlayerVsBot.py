@@ -4,6 +4,7 @@ from Algorithm import *
 import datetime as dt
 import json
 import os
+import time
 
 
 class COMPUTER (tk.Frame):
@@ -88,7 +89,7 @@ class COMPUTER (tk.Frame):
                                                   image=self.checkersPieceDict[self.positions[i][j]])
         
         self.boardCanvas.bind("<Button-1>", self.clickBoard)
-
+        self.boardCanvas.bind("<Motion>", self.computerEvent)
 
     def loadGame(self): # Phím load game               
         self.beginGameHelper()
@@ -153,7 +154,6 @@ class COMPUTER (tk.Frame):
 
         else:
             self.pauseClocksButton.grid_forget()
-
 
     def saveGame(self): # Phím save game
         obj = dict()
@@ -263,8 +263,6 @@ class COMPUTER (tk.Frame):
         self.selected = False
         self.drawOffered = False
 
-
-
     def beginGame(self): #Hiển thi các turn, thời gian,...
 
 
@@ -310,7 +308,6 @@ class COMPUTER (tk.Frame):
         else:
             self.pauseClocksButton.grid_forget()
 
-
     def clickBoard(self, event): #Hiển thị Kiểm tra khi chọn quân cờ
         if self.turn == 0:
             print("It is not your turn now!")
@@ -350,8 +347,6 @@ class COMPUTER (tk.Frame):
                     ptx, pty = pixelToInt(event.x, event.y)
                     self.move(ptx, pty)
     
-
-
     def setPlayer1(self): # Khúc này implement các phím, tg của người chơi 1
         
         self.playerTurnLabel["text"] = "===== "+ self.player1Name + " ====="
@@ -359,7 +354,6 @@ class COMPUTER (tk.Frame):
         self.selected = False
         self.statusLabel["text"] = ""
         self.turn = 0
-
 
     def setPlayer2(self): # Khúc này implement các phím, tg của người chơi 2
         if (self.timerEnabled):
@@ -384,6 +378,8 @@ class COMPUTER (tk.Frame):
             self.offerDrawButton.grid(row = 4, column = 1)
             self.offerDrawButton["state"] = tk.NORMAL
 
+    def computerEvent(self, event):
+        self.computer()
 
     def computer(self): #Bot di chuyển
         if self.turn == 0:
@@ -394,7 +390,7 @@ class COMPUTER (tk.Frame):
                 self.resignGame()
             else:
                 x1, y1, x2, y2 = Go(self.positions, 0, 3)
-                self.selectedPt = (x1, y1)
+                self.selectedPt = (x1, y1)                              
                 self.move(x2, y2)
 
     def move(self, x2, y2): #Hiển thị các trạng thái khi di chuyển của người chơi
@@ -422,8 +418,9 @@ class COMPUTER (tk.Frame):
                 jmplst2 = jumpDetection(self.positions, self.turn)
                 
                 if len(jmplst2) != 0 and self.turn==0:
-                    self.computer()
                     print("COMPUTER turn...")
+                    self.computer()
+                    
                 
                 elif len(jmplst2) != 0:
                     self.selected = False
@@ -439,7 +436,7 @@ class COMPUTER (tk.Frame):
                             self.setPlayer2()
                         else:
                             self.setPlayer1()
-                            self.computer()
+                            #self.computer()
         else:
             s = set(mvlst)
             if ((x2, y2) not in s):
@@ -452,14 +449,13 @@ class COMPUTER (tk.Frame):
 
                 convertToKing(self.positions)
                 self.draw()
-
+                
                 if self.turn == 0:
                     self.setPlayer2()
                 else:
                     self.setPlayer1()
-                    self.computer()
+                    #self.computer()
                 
-
     def endGame(self): # Thể hiện màng hình khi game kết thúc
         self.game.destroy()
 
@@ -578,7 +574,6 @@ class COMPUTER (tk.Frame):
             self.timeNow = time
             self.alarmID = self.game.after(250, self.updateClocks)
 
-
     def acceptDraw(self):
         self.endGame()
         self.endGameResult["text"] = "This game was a draw!"
@@ -586,8 +581,6 @@ class COMPUTER (tk.Frame):
     def offerDraw(self):
         self.drawOffered = True
         self.offerDrawButton["state"] = tk.DISABLED
-
-
 
 def pixelToInt(x, y): # Chuyển tọa độ dạng pixel sang (x,y) trên bàng cờ trả về tọa độ trên bàn cờ
     retx = 0

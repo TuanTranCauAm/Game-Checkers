@@ -37,7 +37,7 @@ class Game (tk.Frame):
         self.start.grid(row=0)
 
     
-        self.label1 = tk.Label(self, text="\n\t\t\tGAME CHECKERS\t\t\t\t\n", font=2000)
+        self.label1 = tk.Label(self, text="\n\t\t\t\t\t\t\t\n", font=2000)
         self.label1.grid(row=1, column=0)
 
         #self.label1 = tk.Label(self.start, text="\n\t\tGAME CHECKERS           \n", font=2000)
@@ -61,7 +61,7 @@ class Game (tk.Frame):
     
 def main():
     root = tk.Tk()
-    root.geometry("562x750")
+    root.geometry("700x750")
     img = tk.PhotoImage(file="Image/background.png")
     label1 = tk.Label( root, image = img)
     label1.place(x = 0, y = 0)
