@@ -2,6 +2,7 @@ import tkinter as tk
 from PieceOperation import *
 from PlayerVsBot import *
 from PlayerVsPlayer import *
+from PlayOnline import *
 
 class Game (tk.Frame):
     STICKY = tk.N + tk.S + tk.E + tk.W
@@ -18,6 +19,7 @@ class Game (tk.Frame):
         self.okButton1.grid_forget()
         self.okButton2.grid_forget()
         self.okButton3.grid_forget()
+        self.okButton4.grid_forget()
         app = COMPUTER(master=self)
         app.mainloop()
     
@@ -27,9 +29,19 @@ class Game (tk.Frame):
         self.okButton1.grid_forget()
         self.okButton2.grid_forget()
         self.okButton3.grid_forget()
+        self.okButton4.grid_forget()
         app = PLAYER(master=self)
         app.mainloop()
 
+    def vsONLINE(self):
+        self.label1.grid_forget()
+        self.label2.grid_forget()
+        self.okButton1.grid_forget()
+        self.okButton2.grid_forget()
+        self.okButton3.grid_forget()
+        self.okButton4.grid_forget()
+        app = PLAYONLINE(master=self)
+        app.mainloop()
 
     def gameStartupDialog(self):
 
@@ -50,12 +62,16 @@ class Game (tk.Frame):
                                     border=10,height=5, width=30, font=50,
                                     command=self.vsPLAYER)
         self.okButton2.grid(row=4, column = 0)
-        self.okButton3 = tk.Button(self, text="QUIT GAME", fg="red", 
+        self.okButton3 = tk.Button(self, text="PLAY ONLINE", fg="black", 
+                                    border=10,height=5, width=30, font=50,
+                                    command=self.vsONLINE)
+        self.okButton3.grid(row=5, column = 0)
+        self.okButton4 = tk.Button(self, text="QUIT GAME", fg="red", 
                                     border=10,height=5, width=30, font=50,
                                     command=self.quit)
-        self.okButton3.grid(row=5, column = 0)
+        self.okButton4.grid(row=6, column = 0)
         self.label2 = tk.Label(text="\t\t", font=2000)
-        self.label2.grid(row=5, column=0)
+        self.label2.grid(row=6, column=0)
         
 
     
